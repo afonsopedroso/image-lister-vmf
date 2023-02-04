@@ -1,0 +1,26 @@
+.item-inside{
+    color: #fff;
+}
+
+.videobox{
+    border-radius: 10px;
+}
+
+.row{
+    display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: 40px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.casing{
+  flex: 0 0 25%;
+  max-width: 25%;
+  margin-bottom:5px
+
+}
