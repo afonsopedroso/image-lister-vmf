@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
   files: [],
   file: {},
-
+  id: "",
+  mark: null,
 };
 
 export const getData = createAsyncThunk('',
 async (payload, { dispatch, rejectWithValue }) => {
     try {
       const response = await fetch(payload)
+      
       return response.json() // Return a value synchronously using Async-await
     } catch (err) {
       if (!err.response) {
@@ -42,6 +45,7 @@ async (payload, { dispatch, rejectWithValue }) => {
 
 
 const ConfigSlice = createSlice({
+  
   name: "Config",
   initialState: initialState,
   reducers: {
@@ -50,8 +54,18 @@ const ConfigSlice = createSlice({
       state.files = [...state.files, payload];
     },
 
+    setMark(state, payload){
+    state.mark = payload
+  },
+
+    setId(state, payload) {
+      state.id = payload
+    },
+
     
-  
+    setFilesEmpty(state, payload) {
+      state.files = []
+    },
 
     setFile(state, payload) {
       state.file = payload;
@@ -67,11 +81,14 @@ const ConfigSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getData.fulfilled, (state, action) => {
-      console.log(action.payload)
-      state.files.push(action.payload)    })
+      let act = action.payload.images.filter((item) => item.includes(state.id.payload))
+      action.payload.images = act   
+      state.files = action.payload
+    
+    })
   }
 });
 
-export const { setFiles, setEmpty, setFile, setFileEmpty } = ConfigSlice.actions;
+export const { setFiles, setEmpty, setFile, setFileEmpty,setFilesEmpty, setId, setMark } = ConfigSlice.actions;
 
 export default ConfigSlice;

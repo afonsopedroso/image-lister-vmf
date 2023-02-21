@@ -1,10 +1,17 @@
-
-  .image-box {
+    .occ{
+        min-width: 200px;
+        min-height: 200px;
+    }
+  .box {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 20px;
         
+    }
+
+    .container {
+        margin-top: 10px
     }
 
     img {
@@ -19,19 +26,19 @@
     .contactbutton {
         cursor: pointer;
         margin-top: 10px;
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #4CAF50;
-        width: 200px;
-        /* Green */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #00000c29;
+    width: 200px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     }
 
-    .downloadbutton:hover,
-    .contactbutton:hover {
-        background-color: #3e8e41;
+    .downloadbutton:active,
+    .contactbutton:active {
+        box-shadow: 0px 0px 20px 20px #b79afa76;
+
         /* Green */
     }

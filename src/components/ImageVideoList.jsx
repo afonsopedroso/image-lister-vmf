@@ -1,55 +1,58 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getData, setFile, setFileEmpty } from "../store";
-
+import { getData, setFile, setFilesEmpty, setId, setMark } from "../store";
 import style from '../components/ImageVideoList.module.scss'
-import { Link, useParams } from "react-router-dom";
+import { useParams, redirect, useNavigate } from "react-router-dom";
 
 function PageList(props) {
     let files = useSelector((state) => state.Config.files);
-    let videos = useSelector((state) => state.Config.videos);
-    let { id = '00001' } = useParams()
-
-
+    let mark = useSelector((state) => state.Config.mark)
+    let { id = '00001' } = useParams();
+    let ref = useRef(false);
+    const navigate = useNavigate();
+    const [isSet, setIsSet] = useState(false)
 
     const dispatch = useDispatch();
-    const handleClick = (item) => {
-        dispatch(setFile(item))
-        localStorage.setItem('image', item)
-        localStorage.removeItem('video')
+    const handleClick = (item, index, e) => {
+        e.preventDefault()
+        dispatch(setMark(index))
+        if (isSet == true) {
+            console.log("here")
+            navigate('/')
+        } else {
+            dispatch(setFile(item))
+            localStorage.setItem('image', item)
+            localStorage.removeItem('video')
+            setIsSet(true)
+        }
     }
-    const handleVideo = (video) => {
-        dispatch(setFileEmpty())
-        localStorage.setItem('video', video)
-        localStorage.removeItem('image')
-    }
-    const url = 'https://mycorsproxy-alaska.herokuapp.com/https://vmfdigital.com/vmf/afonso/imagevideoapp/lista.json'
+
+    const url = 'https://vmfdigital.com/vmf/afonso/imagevideoapp/lista.json'
     const handleData = () => {
-        console.log("here")
         dispatch(getData(url))
-        console.log("here2")
-
-
-
     }
 
     useEffect(() => {
+
+        dispatch(setId(id))
+        if (ref == true) { return }
+        ref = true
         handleData()
-    }, [])
+    }, [id])
 
     return (
         <div className={style.container}>
             <div className={style.row} >
-                {files ? files.map((item, index) =>
-                    <div className={style.casing} key={index}><Link onClick={() => handleClick(item.payload)} to="/"><img alt={item.payload} width={80} height={80} src={process.env.PUBLIC_URL + '/assets' + item.payload} /></Link>
-                    </div>)
-                    : null}
-                {videos ? videos.map((item, index) => <div key={index} className={style.casing} >
-                    <Link to="/" onClick={() => { handleVideo(item.payload) }}>
-                        <video className={style.videobox} width="80">
-                            <source width={80} height={80} src={process.env.PUBLIC_URL + '/assets' + item.payload} type="video/mp4" />
-                        </video></Link>
-                </div>) : null}
+                {files.images ? files.images.map((item, index) =>
+                    <div className={style.casing} key={index}>{item.includes(id) ?
+                        <button onClick={(e) => handleClick(item, index, e)} ><img className={mark && mark.payload == index ? style.selected : style.imgs} alt={item} src={item} />
+                        </button>
+                        :
+                        null}
+                    </div>
+                )
+                    : null
+                }
             </div>
         </div>
     );

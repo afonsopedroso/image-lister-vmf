@@ -1,33 +1,39 @@
 import style from '../components/MainPage.module.scss'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { setEmpty } from '../store';
+import { Download } from '../functions/Download';
+import { setFilesEmpty } from '../store';
 
 
 
 function MainPage() {
-
-
+    const file = useSelector((state) => state.Config.file)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(setEmpty())
+        dispatch(setFilesEmpty())
+
     })
+
+    const handleDownload = (e) => {
+        e.preventDefault()
+        Download(file.payload.replace(/images/g, "videos").replace(/jpg/g, "mp4"), null)
+    }
 
 
     return (<div className={style.container}>
-        <img src="https://vmfdigital.com/vmf/afonso/imagevideoapp/assets/00001/images/11.jpg" alt="" />
         <div className={style.box} >
-            {localStorage.getItem('image') ? <img width={200} height={200} alt={localStorage.getItem('image')} src={'../assets' + localStorage.getItem('image')} /> : localStorage.getItem('video') ?
-                <video controls="controls" width="200" >
-                    <source width={200} src={'../assets' + localStorage.getItem('video')} type="video/mp4" />
-                </video> : null}
-            <button className={style.downloadbutton} >Download Video</button>
+            {file.payload ?
+                <video controls="controls" height="350" width="350" >
+                    <source width="350" height="350" src={file.payload.replace(/images/g, "videos").replace(/jpg/g, "mp4")} type="video/mp4" />
+                </video> : <div className={style.occ}></div>}
+            <button onClick={handleDownload} className={style.downloadbutton} >Download Video</button>
             <button className={style.contactbutton} >Contact Us</button>
             <Link to="/ImageList/00001">
-                <button className={style.downloadbutton} >show images</button>
+                <button className={style.downloadbutton} >Choose Video</button>
             </Link>
-
         </div>
     </div>);
 }
