@@ -1,16 +1,16 @@
 
 import './App.scss';
-import { BrowserRouter, Route, Routes, HashRouter as Router } from 'react-router-dom';
+import { Route, Routes, HashRouter as Router } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import PageList from './components/ImageVideoList';
 
-
 function App() {
+
   const baseUrl: any = document.getElementsByTagName('base')[0].getAttribute('href');
   return (
     <div className="App">
       <div className='banner'><span className='Fun'>VMF Fun</span></div>
-      <div className='mainContainer'>
+      <div className='mainContainer' >
         <Router>
           <Routes>
             <Route path="/" element={<MainPage />}>
@@ -19,7 +19,7 @@ function App() {
           </Routes>
         </Router>
       </div>
-      <div className='banner end'>Something</div>
+      <div className='banner end'><span className="Footer">Powered by VMF</span></div>
     </div>
   );
 }

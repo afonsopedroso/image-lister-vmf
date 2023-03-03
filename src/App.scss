@@ -1,7 +1,8 @@
 .App {
   text-align: center;
   overflow-x: hidden;
-    background: linear-gradient(90deg, rgba(55,11,110,29) -1%, rgba(15,-24,-4,1) 51%, rgba(91,11,191,1) 104%);
+  background-color: #2201488c;
+  background: linear-gradient(90deg, rgb(51 8 106) -1%, rgb(127 106 106) 51%, rgb(51 8 106) 99%);
    height: 100vh;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -26,14 +27,21 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  .Footer{
+    font-size: 16px;
+    background: -webkit-linear-gradient(rgb(60, 56, 140), rgb(223 204 240));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 .mainContainer{
   overflow-y: scroll;
-  max-height: 85vh;
+  max-height: 87vh;
 }
 .banner {
   overflow-y: hidden;
+  
 width: 100vw;
-    background: linear-gradient(68deg, rgba(55,11,110,29) -1%, rgba(29,-24,-4,1) 51%, rgba(67,11,202,1) 104%);
+    background: linear-gradient(68deg, rgb(55, 11, 110) -1%, rgb(48, 0, 0) 51%, rgb(55 11 110) 99%);
     height: 50px;
     display: flex;
     justify-content: center;

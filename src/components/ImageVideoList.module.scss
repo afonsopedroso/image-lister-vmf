@@ -3,13 +3,13 @@
 }
 
 .videobox{
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .container {
     display: flex;
     justify-content: center;
-    margin-top:12px;
+    height: 87vh;
     overflow-y: scroll;
 }
 
@@ -17,6 +17,8 @@
     display: -ms-flexbox; 
     flex-wrap: wrap;
     display: flex;
+    margin-left: 1vw;
+    margin-right: 1vw
 }
 
 .imgs{
@@ -24,8 +26,7 @@
     display: block;
     border-style: solid;
     border-color: rgba(9, 1, 46, 0.715);
-    width: 96px;
-    height: 98px;
+  
     border-width: 1.5px;
 }
 
@@ -34,17 +35,16 @@ button {
     background: none;
     border: none;
     cursor: pointer;
-    width: auto;
-    height: auto;
+ 
 }
 
 .selected{
     object-fit: cover;
     display: block;
     border-style: solid;
-    border-color: rgba(52, 7, 255, 0.715);
-    width: 96px;
-    height: 98px;
+    border-color: rgb(255, 255, 255);
+    width: 47vw;
+    height: 47vw;
     border-width: 1.5px;
 }
 
@@ -68,7 +68,8 @@ button {
     min-width: 72px;
     display: flex;
     justify-content: center;
-    border-radius: 4px;
-    flex: 0 0 25%;
-    max-width: 25%;
+    margin-bottom: 1.5vw;
+    border-radius: 2px;
+    flex: 0 0 50%;
+    max-width: 50%;
 }

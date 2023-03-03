@@ -6,6 +6,7 @@ const initialState = {
   file: {},
   id: "",
   mark: null,
+  scrollPos: null
 };
 
 export const getData = createAsyncThunk('',
@@ -23,25 +24,6 @@ async (payload, { dispatch, rejectWithValue }) => {
   }
 );
 
-// export const getData = createAsyncThunk('',
-//   async(url) => {
-//     try {
-//       await fetch(url).then((response) => {
-//         console.log(response.json())
-//         response.json()})
-//     }catch{
-//       return
-//     }
-//     return
-  
-//   // const response = await fetch(url)
-//   // await response.json().then((data) => {
-//   //   dispatch
-//   //   return data
-//   // })
-  
-// } )
-
 
 
 const ConfigSlice = createSlice({
@@ -50,7 +32,6 @@ const ConfigSlice = createSlice({
   initialState: initialState,
   reducers: {
     setFiles(state, payload) {
-      console.log(payload)
       state.files = [...state.files, payload];
     },
 
@@ -62,7 +43,10 @@ const ConfigSlice = createSlice({
       state.id = payload
     },
 
-    
+    setScrollPos(state, payload) {
+      state.scrollPos = payload
+    },
+  
     setFilesEmpty(state, payload) {
       state.files = []
     },
@@ -89,6 +73,6 @@ const ConfigSlice = createSlice({
   }
 });
 
-export const { setFiles, setEmpty, setFile, setFileEmpty,setFilesEmpty, setId, setMark } = ConfigSlice.actions;
+export const { setFiles, setEmpty, setFile, setFileEmpty,setFilesEmpty, setId, setMark, setScrollPos } = ConfigSlice.actions;
 
 export default ConfigSlice;
